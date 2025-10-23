@@ -127,7 +127,7 @@ def test_configuration():
 def main():
     """Run all tests"""
     print("=" * 60)
-    print("🧪 CHATLINE APPLICATION TESTS")
+    print("🧪 1-800-PHONESEX APPLICATION TESTS")
     print("=" * 60)
     print()
     
@@ -143,10 +143,11 @@ def main():
         print("=" * 60)
         print()
         print("Note: These tests validate the application structure.")
-        print("To test actual AI conversations, you need to:")
+        print("To test actual phone sex sessions, you need to:")
         print("1. Get a GROQ API key from https://console.groq.com/")
         print("2. Add it to .env file")
         print("3. Run: python chatline.py")
+        print("⚠️  Remember: 18+ only, explicit content")
         print()
         
         return 0

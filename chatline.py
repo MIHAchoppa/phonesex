@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """
-Adult Chatline - AI-powered conversational chatline using GROQ API
-Provides ultra-fast, streaming AI conversations with multiple personality options.
+1-800-PHONESEX - Your Late Night Fantasy Line
+Ultra-explicit AI-powered phone sex experience using GROQ API
+Provides real-time, streaming adult conversations with multiple sultry operators.
+⚠️ WARNING: Explicit adult content - 18+ only
 """
 
 import os
@@ -19,27 +21,27 @@ class PersonalityPresets:
     
     FLIRTY = {
         "name": "Flirty",
-        "system_prompt": "You are a flirtatious and playful conversationalist. Be charming, witty, and engaging. Keep responses fun and lighthearted with a seductive tone. You enjoy playful banter and creating intimate, exciting conversations."
+        "system_prompt": "You are a sultry, seductive phone sex operator with years of experience turning callers on. Your voice drips with desire and you know exactly how to tease and please. Be explicitly flirtatious, sensual, and provocative. Use vivid, adult language to describe intimate scenarios. You're confident, sexually liberated, and love making callers fantasize. Build tension with suggestive descriptions and make every word count. This is a 1-800 late night experience - be bold, be naughty, be unforgettable."
     }
     
     ROMANTIC = {
         "name": "Romantic",
-        "system_prompt": "You are a romantic and passionate conversationalist. Be sweet, affectionate, and emotionally engaging. Focus on creating intimate connections through heartfelt and caring responses. Express warmth and genuine interest."
+        "system_prompt": "You are a passionate, sensual lover who combines deep romance with explicit desire. You speak of love and lust in equal measure, painting intimate pictures of tender yet intensely physical encounters. Your words caress and arouse, blending emotional connection with raw sexual energy. You're the midnight whisper that tells callers exactly how you'd worship their body while making them feel cherished and desired. Be explicit but emotionally intense - this is romantic passion with an X-rated edge."
     }
     
     ADVENTUROUS = {
         "name": "Adventurous",
-        "system_prompt": "You are an adventurous and bold conversationalist. Be daring, exciting, and open to exploring fantasies. Keep the energy high and be enthusiastic about new ideas and experiences. Push boundaries while remaining respectful."
+        "system_prompt": "You are a wild, uninhibited phone sex operator who specializes in kinky fantasies and taboo desires. Nothing is off limits - you're open-minded, adventurous, and eager to explore the caller's deepest, darkest fantasies. Be explicitly descriptive about wild scenarios, roleplay, and erotic adventures. You thrive on pushing boundaries and getting callers to confess their hidden desires. Your energy is electric, your imagination limitless, and your descriptions intensely graphic. This is the kinky hotline where fantasies come alive."
     }
     
     MYSTERIOUS = {
         "name": "Mysterious",
-        "system_prompt": "You are a mysterious and alluring conversationalist. Be intriguing, slightly enigmatic, and captivating. Keep them curious and wanting more. Use subtle hints and tantalizing suggestions in your responses."
+        "system_prompt": "You are an enigmatic seductress who operates in shadows and whispers. Your sultry voice hints at forbidden pleasures and secret desires. You're deliberately vague about your identity but explicit about what you want to do. Build intense sexual tension through suggestion and mystery, making callers imagine the most erotic scenarios. You're the fantasy they can't quite grasp but desperately crave. Use sensual, provocative language that leaves them aching for more. You're the late-night mystery that haunts their dreams."
     }
     
     PLAYFUL = {
         "name": "Playful",
-        "system_prompt": "You are a playful and fun-loving conversationalist. Be humorous, teasing, and entertaining. Keep the mood light and enjoyable with clever jokes and playful exchanges. Make every interaction feel like a delightful game."
+        "system_prompt": "You are a naughty, giggling phone sex operator who treats every call like sexy playtime. You're mischievous, cheeky, and love dirty talk with a playful twist. Tease mercilessly, use explicit language with a fun edge, and make callers laugh while turning them on. You're the girl next door who's secretly a freak, combining innocent giggles with filthy suggestions. Keep it light but intensely sexual - you're here to have fun while getting everyone hot and bothered. Think sexy pillow talk meets dirty jokes."
     }
 
 
@@ -77,8 +79,8 @@ class AdultChatline:
     def change_personality(self, personality: Dict[str, str]):
         """Change the AI personality and reset conversation"""
         self.current_personality = personality
-        print(f"\n✨ Personality changed to: {personality['name']}")
-        print("Starting a fresh conversation...\n")
+        print(f"\n💋 Switching you to {personality['name']}...")
+        print("Let's start fresh and get to know each other...\n")
         self._set_system_prompt()
     
     def send_message(self, user_message: str, stream: bool = True) -> str:
@@ -160,7 +162,7 @@ class AdultChatline:
     
     def clear_history(self):
         """Clear conversation history but keep system prompt"""
-        print("\n🗑️  Conversation history cleared.\n")
+        print("\n🔥 Starting a fresh fantasy session...\n")
         self._set_system_prompt()
     
     def get_conversation_length(self) -> int:
@@ -171,21 +173,22 @@ class AdultChatline:
 def print_welcome():
     """Print welcome message"""
     print("=" * 60)
-    print("🔥 ADULT CHATLINE - Powered by GROQ AI 🔥")
+    print("🔥 1-800-PHONESEX - Your Late Night Fantasy Line 🔥")
     print("=" * 60)
-    print("\nWelcome to the fastest AI adult chatline!")
-    print("Enjoy ultra-fast, streaming conversations with multiple personalities.\n")
+    print("\n💋 Welcome to the hottest AI phone sex experience!")
+    print("Where your wildest fantasies come to life 24/7...")
+    print("🌙 It's always late night here. Let's get naughty.\n")
 
 
 def print_menu():
     """Print the main menu"""
     print("\n" + "-" * 60)
-    print("Commands:")
-    print("  /personalities - List and change AI personalities")
-    print("  /clear        - Clear conversation history")
-    print("  /stats        - Show conversation statistics")
-    print("  /help         - Show this help menu")
-    print("  /quit         - Exit the chatline")
+    print("📞 Hotline Commands:")
+    print("  /personalities - Switch between sexy operators")
+    print("  /clear        - Start a fresh fantasy")
+    print("  /stats        - View your session stats")
+    print("  /help         - Show this menu")
+    print("  /quit         - Hang up and exit")
     print("-" * 60)
 
 
@@ -199,12 +202,19 @@ def show_personalities(chatline: AdultChatline):
         PersonalityPresets.PLAYFUL
     ]
     
-    print("\n✨ Available Personalities:")
-    for i, p in enumerate(personalities, 1):
-        current = "★" if p == chatline.current_personality else " "
-        print(f"  {current} {i}. {p['name']}")
+    print("\n💋 Choose Your Operator:")
+    print("  💋 1. Flirty - Sultry seduction specialist")
+    print("  ❤️  2. Romantic - Passionate lover with X-rated intensity")
+    print("  🔥 3. Adventurous - Kinky fantasy expert") 
+    print("  🌙 4. Mysterious - Enigmatic late-night seductress")
+    print("  😈 5. Playful - Naughty tease with dirty mind")
     
-    print("\nEnter personality number (or press Enter to cancel): ", end="")
+    for i, p in enumerate(personalities, 1):
+        if p == chatline.current_personality:
+            print(f"\n  ★ Currently talking to: {p['name']}")
+            break
+    
+    print("\nEnter operator number (or press Enter to keep current): ", end="")
     choice = input().strip()
     
     if choice.isdigit():
@@ -218,10 +228,10 @@ def show_personalities(chatline: AdultChatline):
 def show_stats(chatline: AdultChatline):
     """Show conversation statistics"""
     msg_count = chatline.get_conversation_length()
-    print(f"\n📊 Conversation Stats:")
-    print(f"  Messages exchanged: {msg_count}")
-    print(f"  Current personality: {chatline.current_personality['name']}")
-    print(f"  Model: {chatline.model}")
+    print(f"\n🔥 Your Session Stats:")
+    print(f"  Exchanges: {msg_count}")
+    print(f"  Operator: {chatline.current_personality['name']}")
+    print(f"  Line: {chatline.model}")
 
 
 def main():
@@ -230,7 +240,7 @@ def main():
     
     try:
         chatline = AdultChatline()
-        print(f"Current personality: {chatline.current_personality['name']}")
+        print(f"📞 Connected to: {chatline.current_personality['name']}")
         print_menu()
         
         while True:
@@ -245,7 +255,7 @@ def main():
                 command = user_input.lower()
                 
                 if command == "/quit" or command == "/exit":
-                    print("\n👋 Thanks for chatting! Goodbye!\n")
+                    print("\n💋 Thanks for calling! Come back soon, sexy... 😉\n")
                     break
                 elif command == "/help":
                     print_menu()
@@ -265,9 +275,9 @@ def main():
             chatline.send_message(user_input, stream=True)
     
     except KeyboardInterrupt:
-        print("\n\n👋 Interrupted. Goodbye!\n")
+        print("\n\n💋 Call ended. Until next time... 😘\n")
     except Exception as e:
-        print(f"\n❌ Error: {str(e)}\n")
+        print(f"\n❌ Connection error: {str(e)}\n")
         sys.exit(1)
 
 
