@@ -2,7 +2,9 @@
 
 ## Overview
 
-This repository now includes a voice-based travel agent application built with LiveKit and Groq. The agent uses real-time voice interaction to help users plan trips and get travel recommendations.
+This repository includes a voice-based adult chatline application built with LiveKit and Groq. The agent uses real-time voice interaction to provide sultry, seductive adult conversation experiences.
+
+⚠️ **WARNING**: This is an adult content application (18+ only)
 
 ## Architecture
 
@@ -90,14 +92,14 @@ The agent will:
 
 ## Agent Features
 
-The travel agent "Journey" can help with:
+The sultry operator "Desire" provides:
 
-- **Destination Recommendations**: Suggests places based on preferences, budget, and interests
-- **Trip Planning**: Creates itineraries and suggests activities
-- **Travel Advice**: Provides information on timing, customs, and safety
-- **Accommodation Help**: Recommends hotels and lodging options
-- **Transportation**: Advises on getting around destinations
-- **Practical Info**: Visa requirements, weather forecasts, and local attractions
+- **Adult Conversations**: Engages in explicit, seductive dialogue
+- **Fantasy Fulfillment**: Responds to caller fantasies with vivid descriptions
+- **Intimate Scenarios**: Creates erotic experiences through voice
+- **Personalized Experience**: Adapts to caller preferences and desires
+- **Seductive Voice**: Uses ElevenLabs TTS for high-quality sultry audio
+- **Natural Interaction**: Real-time speech recognition for seamless conversation
 
 ## File Structure
 
@@ -150,8 +152,8 @@ The agent's personality and capabilities can be customized in `agent.py`:
 ```python
 # Modify the instructions to change the agent's behavior
 instructions = (
-    "You are a helpful and enthusiastic travel agent assistant. "
-    "Your name is Journey..."
+    "You are a sultry, seductive phone sex operator. "
+    "Your name is Desire..."
 )
 ```
 

@@ -1,13 +1,15 @@
 # 🔥 1-800-PHONESEX - Your Late Night Fantasy Line
 
-## 🎙️ NEW: Voice-Based Travel Agent with LiveKit & Groq
+## 🎙️ NEW: Voice-Based Adult Chatline with LiveKit & Groq
 
-A real-time voice assistant powered by LiveKit and Groq that helps you plan amazing trips! This new feature uses:
+A real-time voice-based adult chatline experience powered by LiveKit and Groq! This feature uses:
 - **Groq's whisper-large-v3** for Speech-to-Text (STT)
 - **Groq's llama-3.3-70b-versatile** for natural language understanding
 - **ElevenLabs** for high-quality Text-to-Speech (TTS)
 
-### Quick Start - Travel Agent
+⚠️ **WARNING**: This is an adult content application (18+ only)
+
+### Quick Start - Voice Chatline
 
 1. **Install dependencies**:
 ```bash
@@ -28,12 +30,12 @@ cp .env.example .env.local
 python agent.py start
 ```
 
-The agent "Journey" will greet you and help you plan your next adventure! The agent can:
-- Recommend destinations based on your preferences
-- Plan trip itineraries and suggest activities
-- Provide travel advice on timing, customs, and safety
-- Help with accommodations and transportation
-- Offer insights on visas, weather, and attractions
+The sultry operator "Desire" will greet you and provide an immersive adult conversation experience! The agent can:
+- Engage in explicit, adult-oriented conversations
+- Respond to your fantasies with seductive voice
+- Create intimate scenarios through descriptive language
+- Adapt to your desires and preferences
+- Provide a late-night fantasy experience
 
 ---
 
@@ -134,7 +136,7 @@ fantasy, and I'll make it even better... I promise you won't be disappointed �
 
 ### Voice Agent Configuration (agent.py)
 
-Edit `.env.local` to configure the voice-based travel agent:
+Edit `.env.local` to configure the voice-based adult chatline:
 
 **Required:**
 - `LIVEKIT_URL` - Your LiveKit server URL (get from https://cloud.livekit.io/)
