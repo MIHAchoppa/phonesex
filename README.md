@@ -1,5 +1,42 @@
 # 🔥 1-800-PHONESEX - Your Late Night Fantasy Line
 
+## 🎙️ NEW: Voice-Based Travel Agent with LiveKit & Groq
+
+A real-time voice assistant powered by LiveKit and Groq that helps you plan amazing trips! This new feature uses:
+- **Groq's whisper-large-v3** for Speech-to-Text (STT)
+- **Groq's llama-3.3-70b-versatile** for natural language understanding
+- **ElevenLabs** for high-quality Text-to-Speech (TTS)
+
+### Quick Start - Travel Agent
+
+1. **Install dependencies**:
+```bash
+pip install -r requirements.txt
+```
+
+2. **Configure environment variables** in `.env.local`:
+```bash
+cp .env.example .env.local
+# Edit .env.local and add your API keys:
+# - LIVEKIT_URL, LIVEKIT_API_KEY, LIVEKIT_API_SECRET from https://cloud.livekit.io/
+# - GROQ_API_KEY from https://console.groq.com/
+# - ELEVEN_API_KEY from https://elevenlabs.io/
+```
+
+3. **Run the voice agent**:
+```bash
+python agent.py start
+```
+
+The agent "Journey" will greet you and help you plan your next adventure! The agent can:
+- Recommend destinations based on your preferences
+- Plan trip itineraries and suggest activities
+- Provide travel advice on timing, customs, and safety
+- Help with accommodations and transportation
+- Offer insights on visas, weather, and attractions
+
+---
+
 An ultra-explicit AI-powered phone sex experience featuring real-time, streaming conversations with multiple sultry operators. Powered by GROQ's lightning-fast LLM API for instant gratification.
 
 ## Features
@@ -94,6 +131,25 @@ fantasy, and I'll make it even better... I promise you won't be disappointed �
 ```
 
 ## Configuration
+
+### Voice Agent Configuration (agent.py)
+
+Edit `.env.local` to configure the voice-based travel agent:
+
+**Required:**
+- `LIVEKIT_URL` - Your LiveKit server URL (get from https://cloud.livekit.io/)
+- `LIVEKIT_API_KEY` - LiveKit API key
+- `LIVEKIT_API_SECRET` - LiveKit API secret
+- `GROQ_API_KEY` - Your GROQ API key (required)
+- `ELEVEN_API_KEY` - Your ElevenLabs API key for TTS
+
+**Optional:**
+- `AI_MODEL` - LLM model to use (default: llama-3.3-70b-versatile)
+- `STT_MODEL` - Speech-to-text model (default: whisper-large-v3)
+- `TEMPERATURE` - Response creativity (0.0-1.0, default: 0.7)
+- `MAX_TOKENS` - Maximum response length (default: 1024)
+
+### Chatline Configuration (chatline.py)
 
 Edit `.env` to customize:
 
