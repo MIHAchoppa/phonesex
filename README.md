@@ -180,6 +180,20 @@ This application leverages GROQ's advanced features:
 - GROQ API key (free tier available)
 - Internet connection
 
+### Optional: For Full Monetization Features
+- Stripe account (for payment processing)
+- Flask (for web API example)
+
+To install all dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+For web API features:
+```bash
+pip install flask flask-cors
+```
+
 ## Privacy & Safety
 
 - Conversations are not stored locally by this application
@@ -204,3 +218,22 @@ Contributions welcome! Feel free to submit issues or pull requests.
 For issues or questions:
 - Open an issue on GitHub
 - Check GROQ documentation at [console.groq.com/docs](https://console.groq.com/docs)
+
+### Monetization Features
+For detailed information about payment processing, subscriptions, and premium features, see [MONETIZATION.md](MONETIZATION.md)
+
+### Admin Dashboard
+Administrators can use the admin dashboard utility:
+```bash
+python admin_dashboard.py
+```
+
+Features include:
+- User statistics and analytics
+- Revenue tracking (MRR, ARR, ARPU)
+- Usage analytics
+- Churn risk identification
+- User management (upgrade/downgrade)
+
+### Web API
+An example web API implementation is provided in `web_api_example.py`. This demonstrates how to integrate the monetization features into a web service.
