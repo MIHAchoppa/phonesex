@@ -97,11 +97,48 @@ Edit `.env` to customize:
 
 ### Available Models
 
-GROQ supports several high-performance models:
-- `llama-3.1-70b-versatile` - Best overall performance
-- `llama-3.1-8b-instant` - Fastest responses
-- `mixtral-8x7b-32768` - Long context support
-- `gemma-7b-it` - Google's efficient model
+GROQ supports many high-performance models for different use cases:
+
+#### Llama 3.3 Models (Latest)
+- `llama-3.3-70b-versatile` - Latest versatile 70B model with enhanced capabilities
+- `llama-3.3-70b-specdec` - Speculative decoding version for faster inference
+
+#### Llama 3.2 Models
+- `llama-3.2-1b-preview` - Ultra-lightweight 1B model for fastest responses
+- `llama-3.2-3b-preview` - Compact 3B model balancing speed and quality
+- `llama-3.2-11b-vision-preview` - Vision-capable 11B model
+- `llama-3.2-90b-vision-preview` - High-performance 90B vision model
+
+#### Llama 3.1 Models
+- `llama-3.1-70b-versatile` - Excellent overall performance (recommended default)
+- `llama-3.1-8b-instant` - Ultra-fast 8B model for instant responses
+
+#### Llama 3 Models
+- `llama3-70b-8192` - Original Llama 3 70B with 8K context
+- `llama3-8b-8192` - Original Llama 3 8B with 8K context
+- `llama3-groq-70b-8192-tool-use-preview` - Tool use optimized 70B
+- `llama3-groq-8b-8192-tool-use-preview` - Tool use optimized 8B
+
+#### Security & Moderation
+- `llama-guard-3-8b` - Content moderation and safety model
+
+#### Mixtral Models
+- `mixtral-8x7b-32768` - Mixture of experts with 32K context window
+
+#### Gemma Models (Google)
+- `gemma-7b-it` - Google's efficient 7B instruction-tuned model
+- `gemma2-9b-it` - Latest Gemma 2 9B instruction-tuned model
+
+#### Audio Models (Whisper)
+- `whisper-large-v3` - High-quality audio transcription
+- `whisper-large-v3-turbo` - Faster audio transcription
+- `distil-whisper-large-v3-en` - Distilled English-only transcription
+
+**Recommended Models for Chatline:**
+- **Best Overall**: `llama-3.3-70b-versatile` or `llama-3.1-70b-versatile`
+- **Fastest**: `llama-3.2-1b-preview` or `llama-3.1-8b-instant`
+- **Long Context**: `mixtral-8x7b-32768` (32K tokens)
+- **Efficient**: `gemma2-9b-it` or `gemma-7b-it`
 
 ## Technical Details
 
