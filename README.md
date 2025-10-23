@@ -16,6 +16,11 @@ An ultra-explicit AI-powered phone sex experience featuring real-time, streaming
 - **Late Night Vibes**: Full 1-800 experience with explicit, adult-oriented conversations
 - **Easy Setup**: Simple configuration to start your fantasy session
 - **Interactive Commands**: Control your experience with built-in hotline commands
+- **💳 Monetization System**: Full payment processing, subscription management, and premium features
+  - Three subscription tiers: FREE, PREMIUM, VIP
+  - Secure Stripe payment integration
+  - Usage tracking and limits
+  - Feature gating for premium content
 
 ## Installation
 
@@ -53,6 +58,8 @@ python chatline.py
 - `/personalities` - Switch between sexy operators
 - `/clear` - Start a fresh fantasy session
 - `/stats` - View your session statistics
+- `/plans` - View subscription plans (if monetization enabled)
+- `/upgrade` - Get upgrade information (if monetization enabled)
 - `/help` - Show command menu
 - `/quit` - Hang up and exit
 
@@ -94,6 +101,15 @@ Edit `.env` to customize:
 - `AI_MODEL` - Model to use (default: llama-3.1-70b-versatile)
 - `TEMPERATURE` - Response creativity (0.0-1.0, default: 0.8)
 - `MAX_TOKENS` - Maximum response length (default: 1024)
+
+### Monetization Configuration (Optional)
+
+- `STRIPE_API_KEY` - Your Stripe API key for payment processing
+- `STRIPE_WEBHOOK_SECRET` - Stripe webhook secret for secure webhooks
+- `STRIPE_TEST_MODE` - Set to 'true' for testing (default: true)
+- `USER_DATA_DIR` - Directory for user data storage (default: ./user_data)
+
+For detailed monetization setup, see [MONETIZATION.md](MONETIZATION.md)
 
 ### Available Models
 
