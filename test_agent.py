@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Test script for agent.py
-Tests the voice agent structure without requiring full LiveKit connection.
+Tests the adult chatline voice agent structure without requiring full LiveKit connection.
 """
 
 import os
@@ -53,8 +53,8 @@ def test_agent_instantiation():
     print("Testing voice agent instantiation...")
     
     instructions = (
-        "You are a helpful and enthusiastic travel agent assistant. "
-        "Your name is Journey."
+        "You are a sultry, seductive phone sex operator. "
+        "Your name is Desire."
     )
     
     try:
@@ -123,7 +123,8 @@ def main():
     print("=" * 60)
     
     if tests_passed == tests_total:
-        print("\n✓ All tests passed! The voice agent is properly configured.")
+        print("\n✓ All tests passed! The adult chatline voice agent is properly configured.")
+        print("\n⚠️  WARNING: This is an adult content application (18+ only)")
         print("\nNext steps:")
         print("1. Set up real API keys in .env.local")
         print("2. Configure LiveKit server credentials")
