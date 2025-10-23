@@ -35,12 +35,28 @@ cp .env.example .env
 
 ## Usage
 
+### Demo Mode (No API Key Required)
+
+To see a demonstration of the hotline functionality:
+```bash
+python demo.py
+```
+
+### Live Mode (Requires API Key)
+
 Run the hotline:
 ```bash
 python hotline.py
 ```
 
 Type your messages and press Enter to chat with the AI. Type `quit` or `exit` to end the conversation.
+
+## Testing
+
+Run the test suite:
+```bash
+python test_hotline.py -v
+```
 
 ## Configuration
 
