@@ -19,3 +19,8 @@ dist/
 .idea/
 *.swp
 *.swo
+
+# User data (contains sensitive user information)
+user_data/
+*.db
+*.sqlite

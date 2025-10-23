@@ -1,2 +1,5 @@
 groq>=0.4.0
 python-dotenv>=1.0.0
+
+# Optional: Payment processing (uncomment to enable monetization features with real Stripe integration)
+# stripe>=7.0.0

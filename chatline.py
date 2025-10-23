@@ -15,6 +15,14 @@ from dotenv import load_dotenv
 # Load environment variables
 load_dotenv()
 
+# Import monetization modules
+try:
+    from user_manager import User, UserManager, FeatureGate
+    from payments import SubscriptionTier, UsageTracker, get_plan_features
+    MONETIZATION_ENABLED = True
+except ImportError:
+    MONETIZATION_ENABLED = False
+
 
 class PersonalityPresets:
     """Predefined AI personality presets for different conversation styles"""
@@ -48,7 +56,7 @@ class PersonalityPresets:
 class AdultChatline:
     """Main chatline application with GROQ integration"""
     
-    def __init__(self):
+    def __init__(self, user: Optional['User'] = None):
         """Initialize the chatline with GROQ API"""
         self.api_key = os.getenv("GROQ_API_KEY")
         if not self.api_key:
@@ -64,6 +72,10 @@ class AdultChatline:
         self.conversation_history: List[Dict[str, str]] = []
         self.current_personality = PersonalityPresets.FLIRTY
         
+        # Monetization integration
+        self.user = user
+        self.usage_tracker = UsageTracker() if MONETIZATION_ENABLED else None
+        
         # Initialize conversation with system prompt
         self._set_system_prompt()
     
@@ -78,6 +90,12 @@ class AdultChatline:
     
     def change_personality(self, personality: Dict[str, str]):
         """Change the AI personality and reset conversation"""
+        # Check if user has access to this personality
+        if MONETIZATION_ENABLED and self.user:
+            if not FeatureGate.check_personality_access(self.user, personality['name']):
+                print(f"\n{FeatureGate.get_upgrade_prompt(self.user, 'personality')}")
+                return
+        
         self.current_personality = personality
         print(f"\n💋 Switching you to {personality['name']}...")
         print("Let's start fresh and get to know each other...\n")
@@ -94,6 +112,24 @@ class AdultChatline:
         Returns:
             The AI's response
         """
+        # Check usage limits if monetization is enabled
+        if MONETIZATION_ENABLED and self.user and self.usage_tracker:
+            user_id = self.user.user_id
+            limit = self.user.get_daily_message_limit()
+            current_usage = self.usage_tracker.get_usage(user_id)
+            
+            if not FeatureGate.check_message_limit(self.user, current_usage):
+                return FeatureGate.get_upgrade_prompt(self.user, 'limit')
+            
+            # Track this message
+            self.usage_tracker.track_message(user_id)
+        
+        # Check streaming access
+        if stream and MONETIZATION_ENABLED and self.user:
+            if not FeatureGate.check_streaming_access(self.user):
+                print(f"\n{FeatureGate.get_upgrade_prompt(self.user, 'streaming')}")
+                stream = False
+        
         # Add user message to history
         self.conversation_history.append({
             "role": "user",
@@ -187,6 +223,9 @@ def print_menu():
     print("  /personalities - Switch between sexy operators")
     print("  /clear        - Start a fresh fantasy")
     print("  /stats        - View your session stats")
+    if MONETIZATION_ENABLED:
+        print("  /upgrade      - Upgrade your subscription")
+        print("  /plans        - View subscription plans")
     print("  /help         - Show this menu")
     print("  /quit         - Hang up and exit")
     print("-" * 60)
@@ -203,11 +242,24 @@ def show_personalities(chatline: AdultChatline):
     ]
     
     print("\n💋 Choose Your Operator:")
-    print("  💋 1. Flirty - Sultry seduction specialist")
-    print("  ❤️  2. Romantic - Passionate lover with X-rated intensity")
-    print("  🔥 3. Adventurous - Kinky fantasy expert") 
-    print("  🌙 4. Mysterious - Enigmatic late-night seductress")
-    print("  😈 5. Playful - Naughty tease with dirty mind")
+    
+    # Show which personalities are available based on subscription
+    for i, p in enumerate(personalities, 1):
+        icon = ["💋", "❤️", "🔥", "🌙", "😈"][i-1]
+        desc = ["Sultry seduction specialist", 
+                "Passionate lover with X-rated intensity",
+                "Kinky fantasy expert",
+                "Enigmatic late-night seductress",
+                "Naughty tease with dirty mind"][i-1]
+        
+        # Check if locked
+        locked = ""
+        if MONETIZATION_ENABLED and chatline.user:
+            if not chatline.user.can_access_personality(p['name']):
+                locked = " 🔒"
+        
+        line = f"  {icon} {i}. {p['name']} - {desc}{locked}"
+        print(line)
     
     for i, p in enumerate(personalities, 1):
         if p == chatline.current_personality:
@@ -232,6 +284,70 @@ def show_stats(chatline: AdultChatline):
     print(f"  Exchanges: {msg_count}")
     print(f"  Operator: {chatline.current_personality['name']}")
     print(f"  Line: {chatline.model}")
+    
+    # Show subscription info if monetization is enabled
+    if MONETIZATION_ENABLED and chatline.user:
+        print(f"\n💳 Subscription Info:")
+        print(f"  Tier: {chatline.current_personality['name']}")
+        print(f"  Plan: {chatline.user.subscription_tier.value.upper()}")
+        
+        if chatline.usage_tracker:
+            usage = chatline.usage_tracker.get_usage(chatline.user.user_id)
+            limit = chatline.user.get_daily_message_limit()
+            limit_str = "Unlimited" if limit == -1 else str(limit)
+            print(f"  Messages Today: {usage}/{limit_str}")
+
+
+def show_subscription_plans():
+    """Show available subscription plans"""
+    if not MONETIZATION_ENABLED:
+        print("\n⚠️  Subscription features are not enabled.")
+        return
+    
+    from payments import compare_plans
+    
+    print("\n" + "=" * 60)
+    print("💳 SUBSCRIPTION PLANS")
+    print("=" * 60)
+    
+    plans = compare_plans()
+    
+    for plan in plans:
+        print(f"\n🔥 {plan['name'].upper()} - ${plan['price']:.2f}/month")
+        print(f"   {plan['description']}")
+        print(f"\n   Features:")
+        
+        limit = plan['messages_per_day']
+        limit_str = "Unlimited" if limit == -1 else str(limit)
+        print(f"   • {limit_str} messages per day")
+        
+        print(f"   • Operators: {', '.join(plan['personalities_available'])}")
+        print(f"   • Streaming: {'✓' if plan['streaming'] else '✗'}")
+        print(f"   • Priority Support: {'✓' if plan['priority_support'] else '✗'}")
+        print(f"   • Custom Personalities: {'✓' if plan.get('custom_personalities') else '✗'}")
+    
+    print("\n" + "=" * 60)
+
+
+def handle_upgrade():
+    """Handle subscription upgrade"""
+    if not MONETIZATION_ENABLED:
+        print("\n⚠️  Subscription features are not enabled.")
+        return
+    
+    print("\n💳 UPGRADE YOUR EXPERIENCE")
+    print("-" * 60)
+    print("To upgrade your subscription:")
+    print("1. Visit: https://1800phonesex.example.com/upgrade")
+    print("2. Or contact support: support@1800phonesex.example.com")
+    print("3. Available plans: FREE, PREMIUM ($9.99/mo), VIP ($29.99/mo)")
+    print("\nUpgrade now to unlock:")
+    print("  🔥 All 5 sultry operators")
+    print("  ⚡ Real-time streaming responses")
+    print("  💬 More messages per day")
+    print("  ⭐ Priority support")
+    print("  🎨 Custom personalities (VIP only)")
+    print("-" * 60)
 
 
 def main():
@@ -239,8 +355,27 @@ def main():
     print_welcome()
     
     try:
-        chatline = AdultChatline()
+        # Initialize user if monetization is enabled
+        user = None
+        if MONETIZATION_ENABLED:
+            # For demo purposes, create a free user
+            # In production, this would involve proper authentication
+            user_manager = UserManager()
+            try:
+                user = user_manager.get_user_by_email("demo@example.com")
+                if not user:
+                    user = user_manager.create_user("demo@example.com", SubscriptionTier.FREE)
+            except Exception as e:
+                print(f"⚠️  Could not initialize user system: {e}")
+                user = None
+        
+        chatline = AdultChatline(user=user)
         print(f"📞 Connected to: {chatline.current_personality['name']}")
+        
+        if MONETIZATION_ENABLED and user:
+            plan_name = user.subscription_tier.value.upper()
+            print(f"💳 Current Plan: {plan_name}")
+        
         print_menu()
         
         while True:
@@ -265,6 +400,10 @@ def main():
                     chatline.clear_history()
                 elif command == "/stats":
                     show_stats(chatline)
+                elif command == "/plans":
+                    show_subscription_plans()
+                elif command == "/upgrade":
+                    handle_upgrade()
                 else:
                     print(f"Unknown command: {user_input}")
                     print("Type /help to see available commands.")
